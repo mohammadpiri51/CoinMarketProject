@@ -12,16 +12,4 @@ interface CurrencyInfoService {
     @Headers("X-CMC_PRO_API_KEY:c18ecae8-7ac7-484d-8e4f-d4f62654e318")
     @GET("/v1/cryptocurrency/listings/latest")
     fun getLatest(): Single<ListingDto>
-
-    companion object {
-        const val COINMARKET_BASE_URL = "https://pro-api.coinmarketcap.com"
-    }
-
 }
-
-class test {
-    fun main(){
-
-    }
-}
-

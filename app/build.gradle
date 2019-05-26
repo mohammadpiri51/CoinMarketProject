@@ -26,6 +26,9 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':remote')
+    implementation project(path: ':data')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -42,4 +45,9 @@ dependencies {
 
     implementation "com.google.dagger:dagger:$libraries.dagger"
     kapt "com.google.dagger:dagger-compiler:$libraries.dagger"
+
+    implementation "com.squareup.retrofit2:retrofit:$libraries.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$libraries.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$libraries.retrofit"
+
 }
