@@ -7,7 +7,8 @@ import com.example.remote.dto.toCurrencyInfoEntityList
 import io.reactivex.Single
 import javax.inject.Inject
 
-class CurrencyInfoRemoteService @Inject constructor(private val currencyInfoService: CurrencyInfoService) : ICurrencyInfoRemoteDataSource {
+class CurrencyInfoRemoteService @Inject constructor(private val currencyInfoService: CurrencyInfoService) :
+    ICurrencyInfoRemoteDataSource {
     override fun getLatest(): Single<List<CurrencyInfoEntity>> {
         return currencyInfoService.getLatest().map { listingDto -> listingDto.toCurrencyInfoEntityList() }
     }
