@@ -1,4 +1,4 @@
-package com.example.coinmarketproject.di
+package com.example.coinmarketproject.di.module
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.coinmarketproject.utils.ViewModelFactory

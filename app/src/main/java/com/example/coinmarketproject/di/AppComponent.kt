@@ -3,6 +3,8 @@ package com.example.coinmarketproject.di
 import com.example.coinmarketproject.di.module.DataModule
 import com.example.coinmarketproject.ui.currencyinfo.CurrencyInfoFragment
 import com.example.coinmarketproject.di.module.RemoteModule
+import com.example.coinmarketproject.di.module.ViewModelFactoryModule
+import com.example.coinmarketproject.di.module.ViewModelModule
 import dagger.Component
 
 @Component(modules = [ViewModelFactoryModule::class, ViewModelModule::class, RemoteModule::class, DataModule::class])

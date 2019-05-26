@@ -1,4 +1,4 @@
-package com.example.coinmarketproject.di
+package com.example.coinmarketproject.di.module
 
 import androidx.lifecycle.ViewModel
 import com.example.coinmarketproject.ui.currencyinfo.CurrencyInfoViewModel
