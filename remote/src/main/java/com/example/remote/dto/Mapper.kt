@@ -24,7 +24,7 @@ fun PlatformDto.toPlatformEntity(): PlatformEntity {
         id = this.id,
         name = this.name,
         slug = this.slug,
-        symbol = this.slug,
+        symbol = this.symbol,
         tokenAddress = this.tokenAddress
     )
 }

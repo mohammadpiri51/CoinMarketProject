@@ -10,7 +10,6 @@ import javax.inject.Inject
 class CurrencyInfoRemoteService @Inject constructor(private val currencyInfoService: CurrencyInfoService) :
     ICurrencyInfoRemoteDataSource {
     override fun getLatest(): Single<List<CurrencyInfoEntity>> {
-        val test = currencyInfoService.getLatest().map { listingDto -> listingDto.toCurrencyInfoEntityList() }
         return currencyInfoService.getLatest().map { listingDto -> listingDto.toCurrencyInfoEntityList() }
     }
 }
