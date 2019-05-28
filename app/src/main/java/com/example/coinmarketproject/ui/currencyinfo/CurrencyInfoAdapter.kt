@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coinmarketproject.R
-import com.example.data.entity.CurrencyInfoEntity
+import com.example.data.model.CurrencyInfo
 
-class CurrencyInfoAdapter(private val items: List<CurrencyInfoEntity>) :
+class CurrencyInfoAdapter(private val items: List<CurrencyInfo>) :
     RecyclerView.Adapter<CurrencyInfoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_currency_info_item, parent, false)

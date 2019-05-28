@@ -3,7 +3,7 @@ package com.example.remote.datasource
 import com.example.remote.api.CurrencyInfoService
 import com.example.remote.dto.ListingDto
 import com.example.remote.dto.StatusDto
-import com.example.remote.dto.toCurrencyInfoEntityList
+import com.example.remote.dto.toCurrencyInfoList
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -40,7 +40,7 @@ class CurrencyInfoRemoteServiceTest {
             .test()
             .assertComplete()
             .assertNoErrors()
-            .assertValue(listingDto.toCurrencyInfoEntityList())
+            .assertValue(listingDto.toCurrencyInfoList())
     }
 
     @Test

@@ -1,9 +1,9 @@
 package com.example.remote.dto
 
-import com.example.data.entity.CurrencyInfoEntity
-import com.example.data.entity.PlatformEntity
-import com.example.data.entity.QuoteEntity
-import com.example.data.entity.UsdEntity
+import com.example.data.model.CurrencyInfo
+import com.example.data.model.Platform
+import com.example.data.model.Quote
+import com.example.data.model.Usd
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -64,46 +64,46 @@ class MapperKtTest {
     )
 
     @Test
-    fun `ListingDto to CurrencyInfoEntityList`() {
-        val currencyInfoEntityList = listOf(currencyInfoDto.toCurrencyInfoEntity())
-        assertEquals(currencyInfoEntityList, listingDto.toCurrencyInfoEntityList())
+    fun `ListingDto to CurrencyInfoList`() {
+        val currencyInfoList = listOf(currencyInfoDto.toCurrencyInfo())
+        assertEquals(currencyInfoList, listingDto.toCurrencyInfoList())
     }
 
     @Test
-    fun `CurrencyInfoDto to CurrencyInfoEntity`() {
-        val currencyInfoEntity = CurrencyInfoEntity(
+    fun `CurrencyInfoDto to CurrencyInfo`() {
+        val currencyInfo = CurrencyInfo(
             name = currencyInfoDto.name,
-            platform = currencyInfoDto.platform?.toPlatformEntity(),
+            platform = currencyInfoDto.platform?.toPlatform(),
             symbol = currencyInfoDto.symbol,
             slug = currencyInfoDto.slug,
-            quote = currencyInfoDto.quote.toQuoteEntity()
+            quote = currencyInfoDto.quote.toQuote()
         )
 
-        assertEquals(currencyInfoEntity, currencyInfoDto.toCurrencyInfoEntity())
+        assertEquals(currencyInfo, currencyInfoDto.toCurrencyInfo())
     }
 
     @Test
-    fun `PlatformDto to PlatformEntity()`() {
-        val platformEntity = PlatformEntity(
+    fun `PlatformDto to Platform()`() {
+        val platform = Platform(
             id = platformDto.id,
             name = platformDto.name,
             slug = platformDto.slug,
             symbol = platformDto.symbol,
             tokenAddress = platformDto.tokenAddress
         )
-        assertEquals(platformEntity, platformDto.toPlatformEntity())
+        assertEquals(platform, platformDto.toPlatform())
     }
 
     @Test
-    fun `QuoteDto to QuoteEntity`() {
-        val quoteEntity = QuoteEntity(
-            usd = quoteDto.usd?.toUsdEntity()
+    fun `QuoteDto to Quote`() {
+        val quote = Quote(
+            usd = quoteDto.usd?.toUsd()
         )
     }
 
     @Test
-    fun `UsdDto to UsdEntity`() {
-        val usdEntity = UsdEntity(
+    fun `UsdDto to Usd`() {
+        val usd = Usd(
             lastUpdated = usdDto.lastUpdated,
             volume24h = usdDto.volume24h,
             price = usdDto.price,
@@ -112,6 +112,6 @@ class MapperKtTest {
             percentChange1h = usdDto.percentChange1h,
             marketCap = usdDto.marketCap
         )
-        assertEquals(usdEntity, usdDto.toUsdEntity())
+        assertEquals(usd, usdDto.toUsd())
     }
 }

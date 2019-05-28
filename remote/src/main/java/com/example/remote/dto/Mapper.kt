@@ -1,26 +1,26 @@
 package com.example.remote.dto
 
-import com.example.data.entity.CurrencyInfoEntity
-import com.example.data.entity.PlatformEntity
-import com.example.data.entity.QuoteEntity
-import com.example.data.entity.UsdEntity
+import com.example.data.model.CurrencyInfo
+import com.example.data.model.Platform
+import com.example.data.model.Quote
+import com.example.data.model.Usd
 
-fun ListingDto.toCurrencyInfoEntityList():List<CurrencyInfoEntity>{
-    return this.items.map { currencyInfoDto -> currencyInfoDto.toCurrencyInfoEntity() }
+fun ListingDto.toCurrencyInfoList(): List<CurrencyInfo> {
+    return this.items.map { currencyInfoDto -> currencyInfoDto.toCurrencyInfo() }
 }
 
-fun CurrencyInfoDto.toCurrencyInfoEntity(): CurrencyInfoEntity {
-    return CurrencyInfoEntity(
+fun CurrencyInfoDto.toCurrencyInfo(): CurrencyInfo {
+    return CurrencyInfo(
         name = this.name,
         symbol = this.symbol,
         slug = this.slug,
-        platform = this.platform?.toPlatformEntity(),
-        quote = this.quote?.toQuoteEntity()
+        platform = this.platform?.toPlatform(),
+        quote = this.quote?.toQuote()
     )
 }
 
-fun PlatformDto.toPlatformEntity(): PlatformEntity {
-    return PlatformEntity(
+fun PlatformDto.toPlatform(): Platform {
+    return Platform(
         id = this.id,
         name = this.name,
         slug = this.slug,
@@ -29,14 +29,14 @@ fun PlatformDto.toPlatformEntity(): PlatformEntity {
     )
 }
 
-fun QuoteDto.toQuoteEntity(): QuoteEntity {
-    return QuoteEntity(
-        usd = this.usd?.toUsdEntity()
+fun QuoteDto.toQuote(): Quote {
+    return Quote(
+        usd = this.usd?.toUsd()
     )
 }
 
-fun UsdDto.toUsdEntity(): UsdEntity {
-    return UsdEntity(
+fun UsdDto.toUsd(): Usd {
+    return Usd(
         lastUpdated = this.lastUpdated,
         marketCap = this.marketCap,
         percentChange1h = this.percentChange1h,

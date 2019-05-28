@@ -1,10 +1,10 @@
 package com.example.data.repository
 
 import com.example.data.datasource.ICurrencyInfoRemoteDataSource
-import com.example.data.entity.CurrencyInfoEntity
-import com.example.data.entity.PlatformEntity
-import com.example.data.entity.QuoteEntity
-import com.example.data.entity.UsdEntity
+import com.example.data.model.CurrencyInfo
+import com.example.data.model.Platform
+import com.example.data.model.Quote
+import com.example.data.model.Usd
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -19,13 +19,13 @@ class CurrencyInfoRepositoryTest {
 
     private val currencyInfoRemoteDataSource: ICurrencyInfoRemoteDataSource = mockk()
     private val currencyInfoRepository = CurrencyInfoRepository(currencyInfoRemoteDataSource)
-    private val currencyInfoEntityList = listOf(
-        CurrencyInfoEntity(
+    private val currencyInfoList = listOf(
+        CurrencyInfo(
             name = "1",
             symbol = "2",
             slug = "3",
-            quote = QuoteEntity(
-                UsdEntity(
+            quote = Quote(
+                Usd(
                     lastUpdated = "",
                     marketCap = 1.0,
                     percentChange1h = 2.0,
@@ -35,7 +35,7 @@ class CurrencyInfoRepositoryTest {
                     volume24h = 6.0
                 )
             ),
-            platform = PlatformEntity(
+            platform = Platform(
                 id = 1,
                 name = "2",
                 slug = "3",
@@ -57,13 +57,13 @@ class CurrencyInfoRepositoryTest {
 
     @Test
     fun `getLatest successful`() {
-        every { currencyInfoRemoteDataSource.getLatest() } returns Single.just(currencyInfoEntityList)
+        every { currencyInfoRemoteDataSource.getLatest() } returns Single.just(currencyInfoList)
 
         currencyInfoRepository.getLatest()
             .test()
             .assertComplete()
             .assertNoErrors()
-            .assertValue(currencyInfoEntityList)
+            .assertValue(currencyInfoList)
     }
 
     @Test
