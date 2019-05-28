@@ -8,7 +8,7 @@ ext {
             androidX        : "1.0.2",
             coreKtx         : "1.0.1",
             constraintLayout: "2.0.0-alpha4",
-            room            : "2.0.0",
+            room            : "2.1.0-alpha04",
             okHttp          : "3.12.2",
             rxJava          : "2.2.8",
             rxAndroid       : "2.1.1",

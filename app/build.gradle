@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation project(path: ':remote')
     implementation project(path: ':data')
+    implementation project(path: ':local')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -52,5 +53,9 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxjava:$libraries.rxJava"
     implementation "io.reactivex.rxjava2:rxandroid:$libraries.rxAndroid"
+
+    implementation "androidx.room:room-runtime:2.1.0-alpha04"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    kapt "androidx.room:room-compiler:2.1.0-alpha04"
 
 }
