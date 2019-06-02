@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class CurrencyInfoEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Int?,
 
     @ColumnInfo(name = "name")
     val name: String?,
@@ -17,5 +17,8 @@ data class CurrencyInfoEntity(
     val slug: String?,
 
     @ColumnInfo(name = "symbol")
-    val symbol: String?
+    val symbol: String?,
+
+    @ColumnInfo(name = "price")
+    val price: Double?
 )

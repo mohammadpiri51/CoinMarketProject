@@ -14,6 +14,7 @@ fun CurrencyInfoDto.toCurrencyInfo(): CurrencyInfo {
         name = this.name,
         symbol = this.symbol,
         slug = this.slug,
+        price = this.quote?.usd?.price,
         platform = this.platform?.toPlatform(),
         quote = this.quote?.toQuote()
     )

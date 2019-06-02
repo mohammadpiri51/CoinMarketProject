@@ -5,5 +5,6 @@ data class CurrencyInfo(
     val platform: Platform?,
     val quote: Quote?,
     val slug: String?,
-    val symbol: String?
+    val symbol: String?,
+    val price: Double?
 )

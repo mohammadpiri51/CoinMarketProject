@@ -20,7 +20,7 @@ class CurrencyInfoRemoteServiceTest {
         items = emptyList(),
         status = StatusDto(0, 0, 0, "", "")
     )
-    private val currencyInfoRemoteService = CurrencyInfoRemoteService(currencyInfoService)
+    private val currencyInfoRemoteService = CurrencyInfoRemoteDataSource(currencyInfoService)
 
     @Before
     fun setUp() {

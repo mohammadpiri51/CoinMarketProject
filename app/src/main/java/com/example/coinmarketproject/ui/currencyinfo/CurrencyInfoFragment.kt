@@ -1,10 +1,12 @@
 package com.example.coinmarketproject.ui.currencyinfo
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -48,10 +50,12 @@ class CurrencyInfoFragment : Fragment() {
     }
 
     private fun onCurrencyInfoListReady(currencyInfoList: List<CurrencyInfo>) {
-        val recyclerView=view?.findViewById<RecyclerView>(R.id.rv_currency_info)
-        recyclerView?.layoutManager=LinearLayoutManager(requireContext())
-        val currencyInfoAdapter=CurrencyInfoAdapter(currencyInfoList)
-        recyclerView?.adapter=currencyInfoAdapter
+        val progressBar = view?.findViewById<ProgressBar>(R.id.pb_currency_info)
+        progressBar?.visibility = View.GONE
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_currency_info)
+        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
+        val currencyInfoAdapter = CurrencyInfoAdapter(currencyInfoList)
+        recyclerView?.adapter = currencyInfoAdapter
+        recyclerView?.visibility= View.VISIBLE
     }
-
 }

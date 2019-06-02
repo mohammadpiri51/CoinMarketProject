@@ -2,12 +2,13 @@ package com.example.local.dao
 
 import androidx.room.*
 import com.example.local.entity.CurrencyInfoEntity
+import io.reactivex.Single
 
 @Dao
 interface CurrencyInfoDao {
 
     @Query("select * from CurrencyInfo")
-    fun getAll(): List<CurrencyInfoEntity>
+    fun getAll(): Single<List<CurrencyInfoEntity>>
 
     @Query("select * from CurrencyInfo where id = :id")
     fun get(id: Int): CurrencyInfoEntity

@@ -1,6 +1,7 @@
 package com.example.coinmarketproject.di.module
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.example.coinmarketproject.MainApplication
 import dagger.Module
 import dagger.Provides
@@ -12,5 +13,11 @@ class AppModule(private val app: MainApplication) {
     @Provides
     fun provideContext(): Context {
         return app.applicationContext
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(context: Context): SharedPreferences {
+        return context.getSharedPreferences("currencyInfo.data", Context.MODE_PRIVATE)
     }
 }

@@ -1,6 +1,6 @@
 package com.example.data.repository;
 
-import com.example.data.datasource.ICurrencyInfoRemoteDataSource;
+import com.example.data.datasource.ICurrencyInfoLocalDataSource;
 import dagger.internal.Factory;
 import javax.annotation.Generated;
 import javax.inject.Provider;
@@ -10,30 +10,30 @@ import javax.inject.Provider;
   comments = "https://google.github.io/dagger"
 )
 public final class CurrencyInfoRepository_Factory implements Factory<CurrencyInfoRepository> {
-  private final Provider<ICurrencyInfoRemoteDataSource> currencyInfoRemoteDataSourceProvider;
+  private final Provider<ICurrencyInfoLocalDataSource> currencyInfoLocalDataSourceProvider;
 
   public CurrencyInfoRepository_Factory(
-      Provider<ICurrencyInfoRemoteDataSource> currencyInfoRemoteDataSourceProvider) {
-    this.currencyInfoRemoteDataSourceProvider = currencyInfoRemoteDataSourceProvider;
+      Provider<ICurrencyInfoLocalDataSource> currencyInfoLocalDataSourceProvider) {
+    this.currencyInfoLocalDataSourceProvider = currencyInfoLocalDataSourceProvider;
   }
 
   @Override
   public CurrencyInfoRepository get() {
-    return provideInstance(currencyInfoRemoteDataSourceProvider);
+    return provideInstance(currencyInfoLocalDataSourceProvider);
   }
 
   public static CurrencyInfoRepository provideInstance(
-      Provider<ICurrencyInfoRemoteDataSource> currencyInfoRemoteDataSourceProvider) {
-    return new CurrencyInfoRepository(currencyInfoRemoteDataSourceProvider.get());
+      Provider<ICurrencyInfoLocalDataSource> currencyInfoLocalDataSourceProvider) {
+    return new CurrencyInfoRepository(currencyInfoLocalDataSourceProvider.get());
   }
 
   public static CurrencyInfoRepository_Factory create(
-      Provider<ICurrencyInfoRemoteDataSource> currencyInfoRemoteDataSourceProvider) {
-    return new CurrencyInfoRepository_Factory(currencyInfoRemoteDataSourceProvider);
+      Provider<ICurrencyInfoLocalDataSource> currencyInfoLocalDataSourceProvider) {
+    return new CurrencyInfoRepository_Factory(currencyInfoLocalDataSourceProvider);
   }
 
   public static CurrencyInfoRepository newCurrencyInfoRepository(
-      ICurrencyInfoRemoteDataSource currencyInfoRemoteDataSource) {
-    return new CurrencyInfoRepository(currencyInfoRemoteDataSource);
+      ICurrencyInfoLocalDataSource currencyInfoLocalDataSource) {
+    return new CurrencyInfoRepository(currencyInfoLocalDataSource);
   }
 }
