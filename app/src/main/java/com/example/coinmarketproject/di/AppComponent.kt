@@ -12,8 +12,8 @@ import javax.inject.Singleton
         ViewModelFactoryModule::class,
         ViewModelModule::class,
         RemoteModule::class,
-        DataModule::class,
-        LocalModule::class]
+        LocalModule::class,
+        DataModule::class]
 )
 interface AppComponent {
     fun inject(currencyInfoFragment: CurrencyInfoFragment)

@@ -2,6 +2,7 @@ package com.example.coinmarketproject.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.coinmarketproject.R
@@ -13,7 +14,11 @@ class MainActivity : AppCompatActivity() {
     private var selectedItemId = 0
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
+        onNavigationItemSelected(item.itemId)
+    }
+
+    private fun onNavigationItemSelected(itemId: Int): Boolean {
+        when (itemId) {
             R.id.navigation_home -> {
                 if (selectedItemId != R.id.navigation_home) {
                     supportFragmentManager.beginTransaction()
@@ -24,30 +29,30 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     selectedItemId = R.id.navigation_home
                 }
-                return@OnNavigationItemSelectedListener true
+                return true
             }
             R.id.navigation_dashboard -> {
                 if (selectedItemId != R.id.navigation_dashboard) {
                     selectedItemId = R.id.navigation_dashboard
                 }
-                return@OnNavigationItemSelectedListener true
+                return true
             }
             R.id.navigation_notifications -> {
                 if (selectedItemId != R.id.navigation_notifications) {
                     selectedItemId = R.id.navigation_notifications
                 }
-                return@OnNavigationItemSelectedListener true
+                return true
             }
         }
-        false
+        return false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        onNavigationItemSelected(R.id.navigation_home)
     }
 
     override fun onResume() {

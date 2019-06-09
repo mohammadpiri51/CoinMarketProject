@@ -1,6 +1,7 @@
 package com.example.local.datasource
 
 import android.content.SharedPreferences
+import androidx.annotation.VisibleForTesting
 import com.example.data.datasource.ICurrencyInfoLocalDataSource
 import com.example.data.datasource.ICurrencyInfoRemoteDataSource
 import com.example.data.model.CurrencyInfo
@@ -8,25 +9,22 @@ import com.example.local.database.CoinMarketDataBase
 import com.example.local.mapper.toCurrencyInfoEntityList
 import com.example.local.mapper.toCurrencyInfoList
 import io.reactivex.Single
-import java.util.concurrent.TimeUnit
 
 
 class CurrencyInfoLocalDataSource(
     private val coinMarketDataBase: CoinMarketDataBase,
     private val currencyInfoRemoteDataSource: ICurrencyInfoRemoteDataSource,
     private val sharedPreferences: SharedPreferences
-) :
-    ICurrencyInfoLocalDataSource {
+) : ICurrencyInfoLocalDataSource {
 
     override fun getLatest(): Single<List<CurrencyInfo>> {
-        val lastGetTime = sharedPreferences.getLong(LAST_GET_LATEST_TIME, System.currentTimeMillis())
-        val diffInMs = System.currentTimeMillis() - lastGetTime
-        val diffInMin = TimeUnit.MILLISECONDS.toMinutes(diffInMs)
-        if (diffInMin < 2) {
+        val getTimeIntervalFromLastTime = getTimeIntervalFromLastTime()
+
+        if (getTimeIntervalFromLastTime < PERIOD_TIME_FOR_GET_FROM_REMOTE_IN_MILLIS) {
             return coinMarketDataBase.currencyInfoDao().getAll().map { it.toCurrencyInfoList() }
-                .flatMap { localList: List<CurrencyInfo> ->
-                    if (localList.isNotEmpty()) {
-                        return@flatMap Single.just(localList)
+                .flatMap { currencyInfoList: List<CurrencyInfo> ->
+                    if (currencyInfoList.isNotEmpty()) {
+                        return@flatMap Single.just(currencyInfoList)
                     } else {
                         return@flatMap getLatestFromRemote()
                     }
@@ -37,7 +35,8 @@ class CurrencyInfoLocalDataSource(
 
     }
 
-    private fun getLatestFromRemote(): Single<List<CurrencyInfo>> {
+    @VisibleForTesting
+    fun getLatestFromRemote(): Single<List<CurrencyInfo>> {
         return currencyInfoRemoteDataSource.getLatest()
             .map {
                 addCurrencyInfoList(it)
@@ -46,14 +45,26 @@ class CurrencyInfoLocalDataSource(
     }
 
     override fun addCurrencyInfoList(currencyInfoList: List<CurrencyInfo>) {
-        sharedPreferences
-            .edit()
-            .putLong(LAST_GET_LATEST_TIME, System.currentTimeMillis())
-            .apply()
+        saveLastGetLatestTime()
         coinMarketDataBase.currencyInfoDao().insert(currencyInfoList.toCurrencyInfoEntityList())
     }
 
+    fun getTimeIntervalFromLastTime(): Long {
+        val currentTimeMillis = System.currentTimeMillis()
+        val lastGetTime = sharedPreferences.getLong(LAST_GET_LATEST_TIME, currentTimeMillis)
+        return currentTimeMillis - lastGetTime
+    }
+
+    @VisibleForTesting
+    fun saveLastGetLatestTime(time: Long = System.currentTimeMillis()) {
+        sharedPreferences
+            .edit()
+            .putLong(LAST_GET_LATEST_TIME, time)
+            .apply()
+    }
+
     companion object {
+        const val PERIOD_TIME_FOR_GET_FROM_REMOTE_IN_MILLIS: Long = 300000
         const val LAST_GET_LATEST_TIME = "last_get_latest_time"
     }
 }

@@ -17,7 +17,7 @@ class AppModule(private val app: MainApplication) {
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences("currencyInfo.data", Context.MODE_PRIVATE)
+    fun provideDefaultSharedPreferences(context: Context): SharedPreferences {
+        return context.getSharedPreferences("Default", Context.MODE_PRIVATE)
     }
 }

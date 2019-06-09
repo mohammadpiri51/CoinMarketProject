@@ -11,7 +11,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -36,7 +36,6 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     implementation "com.squareup.retrofit2:converter-gson:$libraries.retrofit"
@@ -47,5 +46,15 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:1.0.0-alpha5"
 // Testing support
     androidTestImplementation "android.arch.core:core-testing:1.0.0-alpha5"
+    implementation("androidx.test:core:1.2.0-beta01")
+    implementation 'androidx.fragment:fragment-testing:1.1.0-alpha09'
+    testImplementation("androidx.test:monitor:1.2.0-beta01")
+    testImplementation("androidx.test:runner:1.2.0-beta01")
+    testImplementation("androidx.test:rules:1.2.0-beta01")
+    testImplementation("androidx.test.ext:junit:1.1.1-beta01")
+    testImplementation("androidx.test.ext:truth:1.2.0-beta01")
+    testImplementation("androidx.test:core:1.2.0-beta01")
+    testImplementation "io.mockk:mockk:1.9.3"
+    androidTestImplementation "io.mockk:mockk-android:1.9.3"
 
 }

@@ -13,9 +13,17 @@ import com.example.coinmarketproject.ui.MainActivity
 
 class NotificationHelper(private val context: Context) {
 
+    init {
+        createNotificationChannel(
+            context,
+            NotificationManagerCompat.IMPORTANCE_DEFAULT, false,
+            "default", "Coin market default channel"
+        )
+    }
+
     fun notificationBuilder(title: String, text: String, bigText: String): NotificationCompat.Builder {
 
-        val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
+        val channelId = "${context.packageName}-default"
 
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
             setSmallIcon(R.drawable.notification_template_icon_bg)
@@ -29,12 +37,6 @@ class NotificationHelper(private val context: Context) {
     }
 
     fun showNotification(notificationBuilder: NotificationCompat.Builder) {
-        createNotificationChannel(
-            context,
-            NotificationManagerCompat.IMPORTANCE_DEFAULT, false,
-            "Coin`s highest and lowest price", "Coin`s highest and lowest price ."
-        )
-
 
         val intent = Intent(context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

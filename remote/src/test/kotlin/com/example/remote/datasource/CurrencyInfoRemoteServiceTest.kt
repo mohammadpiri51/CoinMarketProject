@@ -3,7 +3,7 @@ package com.example.remote.datasource
 import com.example.remote.api.CurrencyInfoService
 import com.example.remote.dto.ListingDto
 import com.example.remote.dto.StatusDto
-import com.example.remote.dto.toCurrencyInfoList
+import com.example.remote.mapper.toCurrencyInfoList
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk

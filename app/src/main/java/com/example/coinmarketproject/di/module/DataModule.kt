@@ -32,6 +32,23 @@ class DataModule {
 }
 
 //@Module
+//class DataModule {
+//    @Provides
+//    fun provideCurrencyInfoRemoteDataSource(
+//        currencyInfoRemoteDataSource: CurrencyInfoRemoteDataSource
+//    ): ICurrencyInfoRemoteDataSource {
+//        return currencyInfoRemoteDataSource
+//    }
+//
+//    @Provides
+//    fun provideCurrencyInfoLocalDataSource(
+//        currencyInfoLocalDataSource: CurrencyInfoLocalDataSource
+//    ): ICurrencyInfoLocalDataSource {
+//        return currencyInfoLocalDataSource
+//    }
+//}
+
+//@Module
 //abstract class DataModule {
 //    @Binds
 //    abstract fun provideCurrencyInfoRemoteDataSource(

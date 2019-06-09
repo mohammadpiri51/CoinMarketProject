@@ -4,6 +4,7 @@ import com.example.data.model.CurrencyInfo
 import com.example.data.model.Platform
 import com.example.data.model.Quote
 import com.example.data.model.Usd
+import com.example.remote.mapper.*
 import org.junit.Test
 
 import org.junit.Assert.*

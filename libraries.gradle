@@ -22,7 +22,8 @@ ext {
             crashlytics     : "2.9.9",
             javax_inject    : "1",
             glide           : "4.8.0",
-            retrofit        : "2.5.0"
+            retrofit        : "2.5.0",
+            picasso         : "2.71828"
     ]
 
     testLibraries = [

@@ -8,11 +8,10 @@
 
     <ImageView
             android:id="@+id/img_currency_info"
-            android:layout_height="80dp"
-            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
             android:layout_margin="20dp"
             android:layout_alignParentRight="true"
-            android:background="@color/DarkGrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -20,8 +19,9 @@
             android:id="@+id/txv_currency_info_name"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="20sp"
+            android:textSize="14sp"
+            android:layout_marginLeft="16dp"
+            android:textStyle="bold"
             tools:text="نام"
             app:layout_constraintStart_toEndOf="@id/img_currency_info"
             app:layout_constraintTop_toTopOf="@id/img_currency_info"
@@ -31,7 +31,7 @@
             android:id="@+id/txv_currency_info_slug"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textSize="14sp"
+            android:textSize="12sp"
             tools:text="اسلاگ"
             app:layout_constraintStart_toStartOf="@id/txv_currency_info_name"
             app:layout_constraintTop_toBottomOf="@id/txv_currency_info_name"
@@ -41,18 +41,29 @@
             android:id="@+id/txv_currency_info_symbol"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textSize="14sp"
+            android:textSize="10sp"
             tools:text="سیمبل"
             app:layout_constraintStart_toStartOf="@id/txv_currency_info_name"
             app:layout_constraintTop_toBottomOf="@id/txv_currency_info_slug"
             app:layout_constraintBottom_toBottomOf="@id/img_currency_info"/>
 
+    <TextView
+            android:id="@+id/txv_currency_info_price"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="قیمت"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_currency_info"
+            app:layout_constraintBottom_toBottomOf="@id/img_currency_info"/>
+
     <ImageView
             android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/DarkGrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txv_currency_info_symbol"/>

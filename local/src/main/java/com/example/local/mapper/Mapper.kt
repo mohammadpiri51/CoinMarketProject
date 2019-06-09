@@ -5,12 +5,14 @@ import com.example.local.entity.CurrencyInfoEntity
 
 fun CurrencyInfoEntity.toCurrencyInfo(): CurrencyInfo {
     return CurrencyInfo(
+        id = this.id,
         name = this.name,
         symbol = this.symbol,
         slug = this.slug,
         platform = null,
         quote = null,
-        price = this.price
+        price = this.price,
+        iconUrl = "https://s2.coinmarketcap.com/static/img/coins/64x64/${this.id}.png"
     )
 }
 
@@ -20,7 +22,7 @@ fun List<CurrencyInfoEntity>.toCurrencyInfoList(): List<CurrencyInfo> {
 
 fun CurrencyInfo.toCurrencyInfoEntity(): CurrencyInfoEntity {
     return CurrencyInfoEntity(
-        id = null,
+        id = this.id,
         name = this.name,
         slug = this.slug,
         symbol = this.symbol,
