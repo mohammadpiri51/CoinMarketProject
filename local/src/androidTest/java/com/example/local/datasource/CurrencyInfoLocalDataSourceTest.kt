@@ -13,6 +13,7 @@ import com.example.data.model.Quote
 import com.example.data.model.Usd
 import com.example.local.database.CoinMarketDataBase
 import com.example.local.datasource.CurrencyInfoLocalDataSource.Companion.PERIOD_TIME_FOR_GET_FROM_REMOTE_IN_MILLIS
+import com.example.local.entity.CurrencyInfoEntity
 import com.example.local.mapper.toCurrencyInfo
 import com.example.local.mapper.toCurrencyInfoEntity
 import io.mockk.every
@@ -34,6 +35,7 @@ class CurrencyInfoLocalDataSourceTest {
     private lateinit var defaultSharedPreferences: SharedPreferences
     private lateinit var currencyInfoLocalDataSource: CurrencyInfoLocalDataSource
 
+    //region before and after
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
@@ -50,6 +52,9 @@ class CurrencyInfoLocalDataSourceTest {
         coinMarketDataBase.close()
         defaultSharedPreferences.clear()
     }
+    //endregion
+
+    //region tests for getLatest function
 
     @Test
     fun getLatest_first_time() {
@@ -90,44 +95,6 @@ class CurrencyInfoLocalDataSourceTest {
             .assertNoErrors()
             .assertResult(expectedResultList)
     }
+    //endregion
 
-
-    @Test
-    fun addCurrencyInfoList() {
-    }
-
-    fun SharedPreferences.clear() {
-        val edit = edit()
-        all.forEach { (k, _) ->
-            edit.remove(k)
-        }
-        edit.commit()
-    }
-
-    fun randomCurrencyInfo(): CurrencyInfo = CurrencyInfo(
-        id = Random.nextInt(),
-        name = Random.nextInt().toString(),
-        price = Random.nextDouble(),
-        slug = Random.nextInt().toString(),
-        symbol = Random.nextInt().toString(),
-        iconUrl = Random.nextInt().toString(),
-        platform = Platform(
-            id = Random.nextInt(),
-            name = Random.nextInt().toString(),
-            symbol = Random.nextInt().toString(),
-            slug = Random.nextInt().toString(),
-            tokenAddress = Random.nextInt().toString()
-        ),
-        quote = Quote(
-            usd = Usd(
-                lastUpdated = Random.nextInt().toString(),
-                price = Random.nextDouble(),
-                volume24h = Random.nextDouble(),
-                percentChange24h = Random.nextDouble(),
-                percentChange7d = Random.nextDouble(),
-                percentChange1h = Random.nextDouble(),
-                marketCap = Random.nextDouble()
-            )
-        )
-    )
 }

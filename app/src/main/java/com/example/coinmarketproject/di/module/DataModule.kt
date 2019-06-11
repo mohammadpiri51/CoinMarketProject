@@ -1,6 +1,7 @@
 package com.example.coinmarketproject.di.module
 
 import android.content.Context
+import dagger.Binds
 import android.content.SharedPreferences
 import com.example.data.datasource.ICurrencyInfoLocalDataSource
 import com.example.data.datasource.ICurrencyInfoRemoteDataSource
@@ -8,7 +9,6 @@ import com.example.local.database.CoinMarketDataBase
 import com.example.local.datasource.CurrencyInfoLocalDataSource
 import com.example.remote.api.CurrencyInfoService
 import com.example.remote.datasource.CurrencyInfoRemoteDataSource
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 

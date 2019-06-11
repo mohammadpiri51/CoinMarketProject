@@ -59,6 +59,8 @@ dependencies {
 
     implementation "com.google.dagger:dagger:$libraries.dagger"
     kapt "com.google.dagger:dagger-compiler:$libraries.dagger"
+    implementation "com.google.dagger:dagger-android-support:$libraries.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$libraries.dagger"
 
     implementation "com.squareup.retrofit2:retrofit:$libraries.retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$libraries.retrofit"

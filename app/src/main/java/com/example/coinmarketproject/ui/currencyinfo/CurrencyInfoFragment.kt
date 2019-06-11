@@ -1,8 +1,6 @@
 package com.example.coinmarketproject.ui.currencyinfo
 
-import android.opengl.Visibility
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,22 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coinmarketproject.MainApplication
-
 import com.example.coinmarketproject.R
 import com.example.data.model.CurrencyInfo
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class CurrencyInfoFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = CurrencyInfoFragment()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MainApplication.appComponent.inject(this)
-    }
+class CurrencyInfoFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -56,6 +44,6 @@ class CurrencyInfoFragment : Fragment() {
         recyclerView?.layoutManager = LinearLayoutManager(requireContext())
         val currencyInfoAdapter = CurrencyInfoAdapter(currencyInfoList)
         recyclerView?.adapter = currencyInfoAdapter
-        recyclerView?.visibility= View.VISIBLE
+        recyclerView?.visibility = View.VISIBLE
     }
 }

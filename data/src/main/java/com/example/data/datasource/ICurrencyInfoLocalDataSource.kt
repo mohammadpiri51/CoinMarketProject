@@ -6,4 +6,5 @@ import io.reactivex.Single
 interface ICurrencyInfoLocalDataSource {
     fun getLatest(): Single<List<CurrencyInfo>>
     fun addCurrencyInfoList(currencyInfoList: List<CurrencyInfo>)
+    fun deleteAllCurrencyInfo()
 }

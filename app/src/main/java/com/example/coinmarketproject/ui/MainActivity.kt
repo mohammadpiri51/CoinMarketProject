@@ -2,14 +2,13 @@ package com.example.coinmarketproject.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.coinmarketproject.R
-import com.example.coinmarketproject.ui.currencyinfo.CurrencyInfoFragment
+import com.example.coinmarketproject.ui.home.HomeFragment
 import com.example.coinmarketproject.ui.service.FirstAndLastCoinPriceService
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     private var selectedItemId = 0
 
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.main_content_frame,
-                            CurrencyInfoFragment()
+                            HomeFragment()
                         )
                         .commit()
                     selectedItemId = R.id.navigation_home

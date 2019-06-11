@@ -1,18 +1,11 @@
 package com.example.coinmarketproject
 
-import android.app.Application
-import com.example.coinmarketproject.di.AppComponent
 import com.example.coinmarketproject.di.DaggerAppComponent
-import com.example.coinmarketproject.di.module.AppModule
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
-class MainApplication : Application() {
-
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+class MainApplication : DaggerApplication() {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.factory().create(this)
     }
 }

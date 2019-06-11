@@ -17,20 +17,43 @@ class CurrencyInfoLocalDataSource(
     private val sharedPreferences: SharedPreferences
 ) : ICurrencyInfoLocalDataSource {
 
+    //region variables
+    companion object {
+        const val PERIOD_TIME_FOR_GET_FROM_REMOTE_IN_MILLIS: Long = 300000
+        const val LAST_GET_LATEST_TIME = "last_get_latest_time"
+    }
+    //endregion
+
+    //region Get
     override fun getLatest(): Single<List<CurrencyInfo>> {
+
         val getTimeIntervalFromLastTime = getTimeIntervalFromLastTime()
+        saveLastGetLatestTime()
 
         if (getTimeIntervalFromLastTime < PERIOD_TIME_FOR_GET_FROM_REMOTE_IN_MILLIS) {
-            return coinMarketDataBase.currencyInfoDao().getAll().map { it.toCurrencyInfoList() }
-                .flatMap { currencyInfoList: List<CurrencyInfo> ->
-                    if (currencyInfoList.isNotEmpty()) {
-                        return@flatMap Single.just(currencyInfoList)
+            return coinMarketDataBase.currencyInfoDao().getAll()
+                .map { localCurrencyInfoEntityList ->
+                    localCurrencyInfoEntityList.toCurrencyInfoList()
+                }
+                .flatMap { localCurrencyInfoList: List<CurrencyInfo> ->
+                    if (localCurrencyInfoList.isNotEmpty()) {
+                        return@flatMap Single.just(localCurrencyInfoList)
                     } else {
                         return@flatMap getLatestFromRemote()
+                            .map { remoteCurrencyInfoList ->
+                                deleteAllCurrencyInfo()
+                                addCurrencyInfoList(remoteCurrencyInfoList)
+                                remoteCurrencyInfoList
+                            }
                     }
                 }
         } else {
             return getLatestFromRemote()
+                .map { remoteCurrencyInfoList ->
+                    deleteAllCurrencyInfo()
+                    addCurrencyInfoList(remoteCurrencyInfoList)
+                    remoteCurrencyInfoList
+                }
         }
 
     }
@@ -38,17 +61,23 @@ class CurrencyInfoLocalDataSource(
     @VisibleForTesting
     fun getLatestFromRemote(): Single<List<CurrencyInfo>> {
         return currencyInfoRemoteDataSource.getLatest()
-            .map {
-                addCurrencyInfoList(it)
-                it
-            }
     }
 
+
+    //endregion
+
+    //region CUD
+
     override fun addCurrencyInfoList(currencyInfoList: List<CurrencyInfo>) {
-        saveLastGetLatestTime()
         coinMarketDataBase.currencyInfoDao().insert(currencyInfoList.toCurrencyInfoEntityList())
     }
 
+    override fun deleteAllCurrencyInfo() {
+        coinMarketDataBase.currencyInfoDao().deleteAll()
+    }
+    //endregion
+
+    //region functions
     fun getTimeIntervalFromLastTime(): Long {
         val currentTimeMillis = System.currentTimeMillis()
         val lastGetTime = sharedPreferences.getLong(LAST_GET_LATEST_TIME, currentTimeMillis)
@@ -62,9 +91,7 @@ class CurrencyInfoLocalDataSource(
             .putLong(LAST_GET_LATEST_TIME, time)
             .apply()
     }
+    //endregion
 
-    companion object {
-        const val PERIOD_TIME_FOR_GET_FROM_REMOTE_IN_MILLIS: Long = 300000
-        const val LAST_GET_LATEST_TIME = "last_get_latest_time"
-    }
+
 }

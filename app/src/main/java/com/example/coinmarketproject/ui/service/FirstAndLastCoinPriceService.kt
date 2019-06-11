@@ -1,28 +1,26 @@
 package com.example.coinmarketproject.ui.service
 
-import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.example.coinmarketproject.MainApplication
 import com.example.coinmarketproject.utils.NotificationHelper
 import com.example.data.model.CurrencyInfo
 import com.example.data.repository.CurrencyInfoRepository
+import dagger.android.DaggerService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class FirstAndLastCoinPriceService : Service() {
+class FirstAndLastCoinPriceService : DaggerService() {
 
     @Inject
     lateinit var currencyInfoRepository: CurrencyInfoRepository
 
-    var firstCoinPrice: CurrencyInfo? = null
-    var lastCoinPrice: CurrencyInfo? = null
+    private var firstCoinPrice: CurrencyInfo? = null
+    private var lastCoinPrice: CurrencyInfo? = null
 
 
     override fun onCreate() {
         super.onCreate()
-        MainApplication.appComponent.inject(this)
         println("serviceOnCreate")
     }
 

@@ -6,8 +6,8 @@ import javax.annotation.Generated;
 import javax.inject.Provider;
 
 @Generated(
-  value = "dagger.internal.codegen.ComponentProcessor",
-  comments = "https://google.github.io/dagger"
+    value = "dagger.internal.codegen.ComponentProcessor",
+    comments = "https://dagger.dev"
 )
 public final class CurrencyInfoRepository_Factory implements Factory<CurrencyInfoRepository> {
   private final Provider<ICurrencyInfoLocalDataSource> currencyInfoLocalDataSourceProvider;
@@ -19,11 +19,6 @@ public final class CurrencyInfoRepository_Factory implements Factory<CurrencyInf
 
   @Override
   public CurrencyInfoRepository get() {
-    return provideInstance(currencyInfoLocalDataSourceProvider);
-  }
-
-  public static CurrencyInfoRepository provideInstance(
-      Provider<ICurrencyInfoLocalDataSource> currencyInfoLocalDataSourceProvider) {
     return new CurrencyInfoRepository(currencyInfoLocalDataSourceProvider.get());
   }
 
@@ -32,7 +27,7 @@ public final class CurrencyInfoRepository_Factory implements Factory<CurrencyInf
     return new CurrencyInfoRepository_Factory(currencyInfoLocalDataSourceProvider);
   }
 
-  public static CurrencyInfoRepository newCurrencyInfoRepository(
+  public static CurrencyInfoRepository newInstance(
       ICurrencyInfoLocalDataSource currencyInfoLocalDataSource) {
     return new CurrencyInfoRepository(currencyInfoLocalDataSource);
   }
